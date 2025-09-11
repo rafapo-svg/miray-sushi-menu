@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -14,14 +12,23 @@
       background-color: #000;
       color: #fff;
     }
+    /* LOGO DESTACADA */
     header.logo-header {
       text-align: center;
-      padding: 20px;
+      padding: 25px;
       background: #000;
     }
     header.logo-header img.logo {
-      max-width: 180px;
+      max-width: 220px;
       height: auto;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(255,0,0,0.8);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 20px rgba(255,0,0,0.6); }
+      50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(255,0,0,1); }
+      100% { transform: scale(1); box-shadow: 0 0 20px rgba(255,0,0,0.6); }
     }
     h2.section-title {
       padding: 10px 20px;
@@ -149,108 +156,41 @@
     <img src="logo/logomiray1.jpg" alt="Miray Sushi - Logotipo" class="logo" loading="lazy">
   </header>
 
-  <!-- TEMAKIS -->
+  <!-- ================== CARDÁPIO ================== -->
   <section>
     <h2 class="section-title">Temakis</h2>
     <div class="menu">
       <div class="item">
-        <img src="logo/Temakis/temaki salmao2.png" alt="Temaki Salmão" loading="lazy">
+        <img src="temaki.jpg" alt="Temaki de Salmão" loading="lazy">
         <h3>Temaki Salmão</h3>
-        <select class="size-select">
-          <option value="30">P - R$ 30,00</option>
-          <option value="40">M - R$ 40,00</option>
-          <option value="50">G - R$ 50,00</option>
-        </select>
+        <p>R$ 25,00</p>
         <div class="quantity-control">
-          <button aria-label="Diminuir" onclick="changeQty(this, -1)">-</button>
+          <button onclick="changeQty(this, -1)">-</button>
           <span class="qty">0</span>
-          <button aria-label="Aumentar" onclick="changeQty(this, 1)">+</button>
+          <button onclick="changeQty(this, 1)">+</button>
         </div>
       </div>
-      <div class="item">
-        <img src="logo/Temakis/temaki camarão2.png" alt="Temaki Camarão" loading="lazy">
-        <h3>Temaki Camarão</h3>
-        <select class="size-select">
-          <option value="30">P - R$ 30,00</option>
-          <option value="40">M - R$ 40,00</option>
-          <option value="50">G - R$ 50,00</option>
-        </select>
-        <div class="quantity-control">
-          <button aria-label="Diminuir" onclick="changeQty(this, -1)">-</button>
-          <span class="qty">0</span>
-          <button aria-label="Aumentar" onclick="changeQty(this, 1)">+</button>
-        </div>
-      </div>
+      <!-- outros itens... -->
     </div>
   </section>
 
-  <!-- SUSHIS -->
   <section>
     <h2 class="section-title">Sushis</h2>
     <div class="menu">
       <div class="item">
-        <img src="logo/Sushis/sushi salmao.png" alt="Sushi Salmão" loading="lazy">
+        <img src="sushi.jpg" alt="Sushi de Salmão" loading="lazy">
         <h3>Sushi Salmão</h3>
-        <p>R$ 10,00</p>
+        <p>R$ 20,00</p>
         <div class="quantity-control">
-          <button aria-label="Diminuir" onclick="changeQty(this, -1)">-</button>
+          <button onclick="changeQty(this, -1)">-</button>
           <span class="qty">0</span>
-          <button aria-label="Aumentar" onclick="changeQty(this, 1)">+</button>
+          <button onclick="changeQty(this, 1)">+</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- HOT HOLL -->
-  <section>
-    <h2 class="section-title">Hot Holl</h2>
-    <div class="menu">
-      <div class="item">
-        <img src="logo/HotHoll/hotholl.png" alt="Hot Holl" loading="lazy">
-        <h3>Hot Holl</h3>
-        <p>R$ 18,00</p>
-        <div class="quantity-control">
-          <button aria-label="Diminuir" onclick="changeQty(this, -1)">-</button>
-          <span class="qty">0</span>
-          <button aria-label="Aumentar" onclick="changeQty(this, 1)">+</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ESPECIAIS -->
-  <section>
-    <h2 class="section-title">Especiais</h2>
-    <div class="menu">
-      <div class="item">
-        <img src="logo/Especiais/combinado.png" alt="Combinado Especial" loading="lazy">
-        <h3>Combinado Especial</h3>
-        <p>R$ 80,00</p>
-        <div class="quantity-control">
-          <button aria-label="Diminuir" onclick="changeQty(this, -1)">-</button>
-          <span class="qty">0</span>
-          <button aria-label="Aumentar" onclick="changeQty(this, 1)">+</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- REFRIGERANTES -->
-  <section>
-    <h2 class="section-title">Refrigerantes</h2>
-    <div class="menu">
-      <div class="item">
-        <img src="logo/Bebidas/coca.png" alt="Coca-Cola Lata" loading="lazy">
-        <h3>Coca-Cola Lata</h3>
-        <p>R$ 6,00</p>
-        <div class="quantity-control">
-          <button aria-label="Diminuir" onclick="changeQty(this, -1)">-</button>
-          <span class="qty">0</span>
-          <button aria-label="Aumentar" onclick="changeQty(this, 1)">+</button>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- outros grupos do cardápio aqui -->
 
   <!-- ÍCONE DO CARRINHO -->
   <div class="cart-icon" onclick="toggleCart()">
@@ -273,6 +213,7 @@
 
   <script>
     let cart = [];
+    const clienteNome = "Rafael Pereira da Silva"; // 🔴 Nome que aparecerá no pedido
 
     function changeQty(btn, delta) {
       let parent = btn.closest(".item");
@@ -313,16 +254,14 @@
       let list = document.getElementById('cartItems');
       list.innerHTML = '';
       let total = 0;
-      let totalItems = 0;
       cart.forEach(item => {
         total += item.price * item.qty;
-        totalItems += item.qty;
         let li = document.createElement('li');
         li.textContent = `${item.qty}x ${item.name} - R$ ${(item.price*item.qty).toFixed(2)}`;
         list.appendChild(li);
       });
       document.getElementById('cartTotal').textContent = total.toFixed(2);
-      document.querySelector('.cart-count').textContent = totalItems;
+      document.querySelector('.cart-count').textContent = cart.length;
     }
 
     function toggleCart() {
@@ -330,7 +269,7 @@
     }
 
     function generateReport() {
-      let report = "Pedido Miray Sushi:\n";
+      let report = `Pedido de ${clienteNome}:\n`;
       cart.forEach(item => {
         report += `${item.qty}x ${item.name} - R$ ${(item.price*item.qty).toFixed(2)}\n`;
       });
