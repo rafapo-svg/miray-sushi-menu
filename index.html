@@ -89,19 +89,17 @@
       padding: 2px 6px;
       border-radius: 50%;
     }
-    .cart-panel {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 80%;
-      max-width: 400px;
-      height: 100%;
-      background: #111;
-      color: white;
-      padding: 20px;
-      transition: right 0.3s ease;
-      z-index: 999;
-    }
+   .cart-panel {
+  background: #111;
+  border-left: 3px solid rgba(255,0,0,0.6); /* vermelho opaco */
+  box-shadow: -4px 0 10px rgba(255,0,0,0.3);
+}
+    .cart-subtitle {
+  font-size: 14px;
+  color: #ccc;
+  margin: 5px 0 15px;
+  text-align: center;
+}
     .cart-panel.open {
       right: 0;
     }
@@ -153,15 +151,16 @@
 
   <!-- PAINEL DO CARRINHO -->
   <div class="cart-panel" id="cartPanel">
-    <h2>Seu Pedido</h2>
-    <ul id="cartItems"></ul>
-    <p><strong>Total:</strong> R$ <span id="cartTotal">0,00</span></p>
-    <div class="cart-actions">
-      <button onclick="shareWhatsApp()">Compartilhar WhatsApp</button>
-      <button onclick="copyReport()">Copiar Pedido</button>
-    </div>
+  <h2>🛒 Seu Pedido</h2>
+  <p class="cart-subtitle">Seu pedido está sendo organizado aqui. Revise antes de enviar pelo WhatsApp.</p>
+  <ul id="cartItems"></ul>
+  <p><strong>Total:</strong> R$ <span id="cartTotal">0,00</span></p>
+  <div class="cart-actions">
+    <button onclick="shareWhatsApp()">Compartilhar WhatsApp</button>
+    <button onclick="copyReport()">Copiar Pedido</button>
   </div>
-
+</div>
+  
   <script>
     let cart = [];
 
@@ -249,4 +248,5 @@ function updateCart() {
 
 </body>
 </html>
+
 
