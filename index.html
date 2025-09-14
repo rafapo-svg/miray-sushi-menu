@@ -108,6 +108,36 @@
 .cart-card .cart-actions button:hover {
   background: #cc0000;
 }
+    /* 🔘 Botão Finalizar Pedido fixo */
+#finalizarBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: red;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  z-index: 1100;
+  font-size: 16px;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+  animation: pulse 1.5s infinite;
+  transition: transform 0.2s;
+}
+
+#finalizarBtn:hover {
+  background: #cc0000;
+  transform: scale(1.05);
+}
+
+/* ✨ Animação de pulsar */
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px rgba(255,0,0,0.6); }
+  50% { box-shadow: 0 0 25px rgba(255,0,0,1); }
+  100% { box-shadow: 0 0 10px rgba(255,0,0,0.6); }
+}
     @media (max-width: 600px) {
       .menu { grid-template-columns: 1fr; }
     }
@@ -184,6 +214,8 @@
     <button onclick="copyReport()">Copiar Pedido</button>
   </div>
 </div>
+  <!-- 🔘 Botão Finalizar Pedido -->
+<button id="finalizarBtn" onclick="goToCart()">Finalizar Pedido</button>
   
   <script>
     let cart = [];
@@ -251,6 +283,12 @@ function updateCart() {
     block: "center"
   });
 }
+    function goToCart() {
+  document.getElementById("cartCard").scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+}
 
     function generateReport() {
       let report = "Pedido Miray Sushi:\n";
@@ -272,9 +310,10 @@ function updateCart() {
       });
     }
   </script>
-
+    
 </body>
 </html>
+
 
 
 
