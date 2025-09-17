@@ -3,276 +3,190 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Miray Sushi - Cardápio</title>
+  <title>Miray Sushi - Menu</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #111;
-      color: #fff;
-    }
-
-    header {
-      text-align: center;
-      padding: 20px;
-      background: #000;
-    }
-
-    .logo {
-      width: 150px;
-    }
-
-    .menu {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-    }
-
-    .item {
-      background: #222;
-      border: 2px solid rgba(255, 0, 0, 0.6);
-      border-radius: 10px;
-      padding: 15px;
-      width: 250px;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-    }
-
-    .item img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
-
-    .item button {
-      margin-top: 10px;
-      padding: 8px 12px;
-      background: red;
-      border: none;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    /* Carrinho */
-    .cart {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #222;
-      padding: 15px;
-      border-radius: 10px;
-      width: 300px;
-      max-height: 400px;
-      overflow-y: auto;
-      display: none;
-      box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
-    }
-
-    .cart h2 {
-      margin-top: 0;
-      color: red;
-    }
-
-    .cart-total {
-      margin-top: 10px;
-      font-weight: bold;
-      font-size: 18px;
-    }
-
-    .cart-btn {
-      margin-top: 10px;
-      padding: 10px;
-      background: red;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    /* Pop-up formulário */
-    .popup {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .popup-content {
-      background: #222;
-      padding: 20px;
-      border-radius: 10px;
-      width: 300px;
-      color: #fff;
-    }
-
-    .popup-content h3 {
-      margin-top: 0;
-      color: red;
-    }
-
-    .popup-content label {
-      display: block;
-      margin: 10px 0 5px;
-    }
-
-    .popup-content select,
-    .popup-content input {
-      width: 100%;
-      padding: 8px;
-      border-radius: 5px;
-      border: none;
-      margin-bottom: 10px;
-    }
-
-    .popup-content button {
-      padding: 10px;
-      width: 100%;
-      border: none;
-      border-radius: 5px;
-      background: red;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-    }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #111; color: #fff; }
+    header { text-align: center; padding: 1rem; background: #222; }
+    h1 { margin: 0; color: #f00; }
+    .menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; padding: 1rem; }
+    .card { background: #1e1e1e; border-radius: 10px; padding: 1rem; text-align: center; box-shadow: 0 0 10px rgba(255,0,0,0.4); }
+    .card img { max-width: 100%; border-radius: 10px; }
+    .count { margin: 0.5rem 0; font-size: 0.9rem; color: #ccc; }
+    button { background: #f00; color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #c00; }
+    #cart { position: fixed; bottom: 70px; left: 50%; transform: translateX(-50%); background: #222; padding: 1rem; border-radius: 15px; width: 90%; max-width: 500px; max-height: 60vh; overflow-y: auto; box-shadow: 0 0 15px rgba(255,0,0,0.5); }
+    #finalizar { position: fixed; bottom: 10px; right: 10px; background: #28a745; color: #fff; padding: 1rem 1.5rem; border-radius: 50px; cursor: pointer; font-size: 1rem; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%{transform:scale(1);} 50%{transform:scale(1.1);} 100%{transform:scale(1);} }
+    #popupForm { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; }
+    #popupContent { background: #1e1e1e; padding: 2rem; border-radius: 10px; width: 90%; max-width: 400px; }
+    #popupContent h2 { margin-top: 0; color: #f00; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; margin-bottom: 0.3rem; }
+    .form-group input, .form-group select { width: 100%; padding: 0.5rem; border-radius: 5px; border: none; }
+    #closePopup { background: #555; margin-top: 1rem; }
   </style>
 </head>
 <body>
   <header>
-    <img src="logo/logo.png" alt="Miray Sushi" class="logo" loading="lazy">
+    <h1>🍣 Miray Sushi</h1>
   </header>
 
-  <!-- Produtos -->
-  <section class="menu">
-    <div class="item">
-      <img src="logo/sushi1.jpg" alt="Sushi" loading="lazy">
-      <h3>Sushi Especial</h3>
-      <p>R$ 25,00</p>
-      <button onclick="addToCart('Sushi Especial', 25)">Adicionar</button>
+  <main class="menu">
+    <div class="card">
+      <img src="https://via.placeholder.com/200x150" alt="Sushi 1">
+      <h3>Sushi Salmão</h3>
+      <div class="count">Quantidade: <span id="count-sushi1">0</span></div>
+      <button onclick="addToCart('Sushi Salmão', 20, 'count-sushi1')">Adicionar</button>
     </div>
-    <div class="item">
-      <img src="logo/temaki.jpg" alt="Temaki" loading="lazy">
+    <div class="card">
+      <img src="https://via.placeholder.com/200x150" alt="Temaki">
       <h3>Temaki</h3>
-      <p>R$ 20,00</p>
-      <button onclick="addToCart('Temaki', 20)">Adicionar</button>
+      <div class="count">Quantidade: <span id="count-sushi2">0</span></div>
+      <button onclick="addToCart('Temaki', 25, 'count-sushi2')">Adicionar</button>
     </div>
-  </section>
+    <div class="card">
+      <img src="https://via.placeholder.com/200x150" alt="Sashimi">
+      <h3>Sashimi</h3>
+      <div class="count">Quantidade: <span id="count-sushi3">0</span></div>
+      <button onclick="addToCart('Sashimi', 30, 'count-sushi3')">Adicionar</button>
+    </div>
+  </main>
 
-  <!-- Carrinho -->
-  <div id="cart" class="cart">
+  <div id="cart">
     <h2>Carrinho</h2>
-    <ul id="cart-items"></ul>
-    <p class="cart-total">Total: R$ <span id="cart-total">0.00</span></p>
-    <button class="cart-btn" onclick="finalizarPedido()">Finalizar Pedido</button>
+    <ul id="cartItems"></ul>
+    <p id="deliveryLine"></p>
+    <hr>
+    <p><strong>Total Final: R$ <span id="finalTotal">0.00</span></strong></p>
   </div>
 
-  <!-- Pop-up -->
-  <div id="popup" class="popup">
-    <div class="popup-content">
-      <h3>Finalizar Pedido</h3>
-      <label for="nome">Seu Nome:</label>
-      <input type="text" id="nome" required>
+  <button id="finalizar" onclick="handleFinalizar()">Finalizar Pedido</button>
 
-      <label for="bairro">Bairro:</label>
-      <select id="bairro" required>
-        <option value="">Selecione</option>
-        <option value="Aerolândia" data-taxa="10">Aerolândia - R$ 10,00</option>
-        <option value="Altamira" data-taxa="20">Altamira - R$ 20,00</option>
-        <option value="Boma" data-taxa="10">Boma - R$ 10,00</option>
-      </select>
-
-      <label for="pagamento">Forma de Pagamento:</label>
-      <select id="pagamento" required>
-        <option value="">Selecione</option>
-        <option value="Dinheiro">Dinheiro</option>
-        <option value="Pix">Pix</option>
-        <option value="Cartão">Cartão</option>
-      </select>
-
-      <button onclick="confirmarPedido()">Confirmar</button>
+  <!-- Popup Form -->
+  <div id="popupForm">
+    <div id="popupContent">
+      <h2>Finalizar Pedido</h2>
+      <div class="form-group">
+        <label>Nome:</label>
+        <input type="text" id="nomeCliente" required>
+      </div>
+      <div class="form-group">
+        <label>Forma de Pagamento:</label>
+        <select id="pagamento" required>
+          <option value="">Selecione</option>
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Pix">Pix</option>
+          <option value="Cartão">Cartão</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Bairro (Entrega):</label>
+        <select id="bairro" onchange="updateDeliveryFee()" required>
+          <option value="">Selecione</option>
+          <option value="Aerolândia">Aerolândia - R$10,00</option>
+          <option value="Altamira">Altamira - R$20,00</option>
+          <option value="Boma">Boma - R$10,00</option>
+        </select>
+      </div>
+      <button onclick="enviarPedido()">Confirmar</button>
+      <button id="closePopup" onclick="closePopup()">Cancelar</button>
     </div>
   </div>
 
   <script>
-    let cart = [];
-    let envioLiberado = false;
-    let taxaEntrega = 0;
+    let cart = {};
+    let deliveryFee = 0;
+    let bairroSelecionado = "";
+    let firstClick = true;
 
-    function addToCart(nome, preco) {
-      cart.push({ nome, preco });
-      atualizarCarrinho();
-      document.getElementById("cart").style.display = "block";
+    function addToCart(item, price, countId) {
+      if (!cart[item]) {
+        cart[item] = { qty: 0, price: price };
+      }
+      cart[item].qty++;
+      document.getElementById(countId).textContent = cart[item].qty;
+      updateCart();
     }
 
-    function atualizarCarrinho() {
-      let lista = document.getElementById("cart-items");
-      let totalEl = document.getElementById("cart-total");
-      lista.innerHTML = "";
+    function updateCart() {
+      const cartItems = document.getElementById("cartItems");
+      cartItems.innerHTML = "";
       let subtotal = 0;
-      cart.forEach(item => {
-        let li = document.createElement("li");
-        li.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
-        lista.appendChild(li);
-        subtotal += item.preco;
-      });
-      totalEl.textContent = (subtotal + taxaEntrega).toFixed(2);
+      for (let item in cart) {
+        const qtd = cart[item].qty;
+        const preco = cart[item].price;
+        const totalItem = qtd * preco;
+        subtotal += totalItem;
+
+        const li = document.createElement("li");
+        li.textContent = `${item} (${qtd}x) - R$ ${totalItem.toFixed(2)}`;
+        cartItems.appendChild(li);
+      }
+
+      if (bairroSelecionado) {
+        document.getElementById("deliveryLine").textContent =
+          `Entrega (${bairroSelecionado}) - R$ ${deliveryFee.toFixed(2)}`;
+      } else {
+        document.getElementById("deliveryLine").textContent = "";
+      }
+
+      document.getElementById("finalTotal").textContent =
+        (subtotal + deliveryFee).toFixed(2);
     }
 
-    function finalizarPedido() {
-      if (!envioLiberado) {
-        document.getElementById("popup").style.display = "flex";
+    function updateDeliveryFee() {
+      const bairro = document.getElementById("bairro").value;
+      bairroSelecionado = bairro;
+      if (bairro === "Aerolândia") deliveryFee = 10;
+      else if (bairro === "Altamira") deliveryFee = 20;
+      else if (bairro === "Boma") deliveryFee = 10;
+      else deliveryFee = 0;
+
+      updateCart();
+    }
+
+    function handleFinalizar() {
+      if (firstClick) {
+        document.getElementById("popupForm").style.display = "flex";
+        firstClick = false;
       } else {
-        enviarWhatsApp();
+        enviarPedido();
       }
     }
 
-    function confirmarPedido() {
-      const nome = document.getElementById("nome").value;
-      const bairroSelect = document.getElementById("bairro");
-      const bairro = bairroSelect.value;
-      const pagamento = document.getElementById("pagamento").value;
+    function closePopup() {
+      document.getElementById("popupForm").style.display = "none";
+    }
 
-      if (!nome || !bairro || !pagamento) {
+    function enviarPedido() {
+      const nome = document.getElementById("nomeCliente").value;
+      const pagamento = document.getElementById("pagamento").value;
+      const bairro = document.getElementById("bairro").value;
+
+      if (!nome || !pagamento || !bairro) {
         alert("Preencha todos os campos!");
         return;
       }
 
-      taxaEntrega = parseFloat(bairroSelect.options[bairroSelect.selectedIndex].dataset.taxa);
-      envioLiberado = true;
-      atualizarCarrinho();
-      document.getElementById("popup").style.display = "none";
-      enviarWhatsApp();
-    }
+      let mensagem = `*Pedido Miray Sushi*%0A`;
+      mensagem += `Nome: ${nome}%0A`;
+      mensagem += `Pagamento: ${pagamento}%0A`;
+      mensagem += `Bairro: ${bairro}%0A`;
+      mensagem += `Itens:%0A`;
 
-    function enviarWhatsApp() {
-      let total = document.getElementById("cart-total").textContent;
-      let nome = document.getElementById("nome").value;
-      let bairro = document.getElementById("bairro").value;
-      let pagamento = document.getElementById("pagamento").value;
+      let subtotal = 0;
+      for (let item in cart) {
+        const qtd = cart[item].qty;
+        const preco = cart[item].price;
+        const totalItem = qtd * preco;
+        subtotal += totalItem;
+        mensagem += `- ${item} (${qtd}x) = R$ ${totalItem.toFixed(2)}%0A`;
+      }
 
-      let msg = `*Pedido Miray Sushi*%0A`;
-      cart.forEach(item => {
-        msg += `- ${item.nome} R$ ${item.preco.toFixed(2)}%0A`;
-      });
-      msg += `%0ASubtotal + entrega: R$ ${total}%0A`;
-      msg += `Nome: ${nome}%0ABairro: ${bairro}%0APagamento: ${pagamento}`;
+      mensagem += `%0AEntrega: R$ ${deliveryFee.toFixed(2)}`;
+      mensagem += `%0A*Total Final: R$ ${(subtotal + deliveryFee).toFixed(2)}*`;
 
-      window.open(`https://wa.me/5599999999999?text=${msg}`, "_blank");
+      window.open(`https://wa.me/5511976039654?text=${mensagem}`, "_blank");
     }
   </script>
 </body>
