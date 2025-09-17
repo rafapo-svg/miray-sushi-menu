@@ -3,208 +3,270 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Miray Sushi - Menu</title>
+  <title>Menu Miray Sushi</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #111; color: #fff; }
-    header { text-align: center; padding: 1rem; background: #222; }
-    h1 { margin: 0; color: #f00; }
-    .menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; padding: 1rem; }
-    .card { background: #1e1e1e; border-radius: 10px; padding: 1rem; text-align: center; box-shadow: 0 0 10px rgba(255,0,0,0.4); }
-    .card img { max-width: 100%; border-radius: 10px; }
-    .count { margin: 0.5rem 0; font-size: 0.9rem; color: #ccc; }
-    button { background: #f00; color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; }
-    button:hover { background: #c00; }
-    #cart { position: fixed; bottom: 70px; left: 50%; transform: translateX(-50%); background: #222; padding: 1rem; border-radius: 15px; width: 90%; max-width: 500px; max-height: 60vh; overflow-y: auto; box-shadow: 0 0 15px rgba(255,0,0,0.5); }
-    #finalizar { position: fixed; bottom: 10px; right: 10px; background: #28a745; color: #fff; padding: 1rem 1.5rem; border-radius: 50px; cursor: pointer; font-size: 1rem; animation: pulse 1.5s infinite; }
-    @keyframes pulse { 0%{transform:scale(1);} 50%{transform:scale(1.1);} 100%{transform:scale(1);} }
-    #popupForm { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; }
-    #popupContent { background: #1e1e1e; padding: 2rem; border-radius: 10px; width: 90%; max-width: 400px; }
-    #popupContent h2 { margin-top: 0; color: #f00; }
-    .form-group { margin-bottom: 1rem; }
-    .form-group label { display: block; margin-bottom: 0.3rem; }
-    .form-group input, .form-group select { width: 100%; padding: 0.5rem; border-radius: 5px; border: none; }
-    #closePopup { background: #555; margin-top: 1rem; }
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    h2 {
+      background: red;
+      padding: 10px;
+      margin: 0;
+      border-radius: 5px;
+    }
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .card {
+      background: #111;
+      border: 1px solid red;
+      border-radius: 10px;
+      box-shadow: 0 0 10px red;
+      width: 250px;
+      margin: 10px;
+      padding: 15px;
+    }
+    .card img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .card h3 {
+      margin: 10px 0 5px;
+    }
+    .price {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .controls button {
+      background: red;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      margin: 0 5px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .cart {
+      margin: 20px auto;
+      padding: 20px;
+      background: #111;
+      border: 1px solid red;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 0 15px red;
+    }
+    .cart h2 {
+      margin-bottom: 15px;
+    }
+    .cart-items {
+      text-align: left;
+      margin-bottom: 15px;
+    }
+    .cart-items p {
+      margin: 5px 0;
+    }
+    .total {
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    .finalizar-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: red;
+      color: white;
+      padding: 15px 25px;
+      border: none;
+      border-radius: 30px;
+      font-size: 18px;
+      cursor: pointer;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    /* Pop-up */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .popup-content {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: left;
+      width: 90%;
+      max-width: 400px;
+    }
+    .popup-content h3 {
+      margin-top: 0;
+      color: red;
+    }
+    .popup-content label {
+      display: block;
+      margin-top: 10px;
+    }
+    .popup-content input, .popup-content select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: none;
+    }
+    .popup-content button {
+      margin-top: 15px;
+      width: 100%;
+      background: red;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🍣 Miray Sushi</h1>
-  </header>
-
-  <main class="menu">
+  <h2>Entradas</h2>
+  <div class="menu">
     <div class="card">
-      <img src="https://via.placeholder.com/200x150" alt="Sushi 1">
-      <h3>Sushi Salmão</h3>
-      <div class="count">Quantidade: <span id="count-sushi1">0</span></div>
-      <button onclick="addToCart('Sushi Salmão', 20, 'count-sushi1')">Adicionar</button>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/200x150" alt="Temaki">
+      <img src="https://via.placeholder.com/120" alt="Temaki">
       <h3>Temaki</h3>
-      <div class="count">Quantidade: <span id="count-sushi2">0</span></div>
-      <button onclick="addToCart('Temaki', 25, 'count-sushi2')">Adicionar</button>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/200x150" alt="Sashimi">
-      <h3>Sashimi</h3>
-      <div class="count">Quantidade: <span id="count-sushi3">0</span></div>
-      <button onclick="addToCart('Sashimi', 30, 'count-sushi3')">Adicionar</button>
-    </div>
-  </main>
-
-    <!-- REFRIGERANTES -->
-<h2 class="section-title">Refrigerantes</h2>
-<section class="menu">
-  <!-- Coca Cola Lata -->
-  <div class="item">
-    <img src="logo/coca-cola-lata.png" alt="coca cola lata">
-    <h3>Coca Cola Lata 330ml</h3>
-    <p>R$ 6,00 / unidade</p>
-    <div class="quantity-control">
-        <button onclick="changeQty(this, -1)">-</button>
-        <span class="qty">0</span>
-        <button onclick="changeQty(this, 1)">+</button>
+      <p class="price">R$ 20,00</p>
+      <div class="controls">
+        <button onclick="updateItem('Temaki', -1, 20)">-</button>
+        <span id="Temaki-count">0</span>
+        <button onclick="updateItem('Temaki', 1, 20)">+</button>
       </div>
     </div>
-
-
-  <div id="cart">
-    <h2>Carrinho</h2>
-    <ul id="cartItems"></ul>
-    <p id="deliveryLine"></p>
-    <hr>
-    <p><strong>Total Final: R$ <span id="finalTotal">0.00</span></strong></p>
+    <div class="card">
+      <img src="https://via.placeholder.com/120" alt="Sushi Especial">
+      <h3>Sushi Especial</h3>
+      <p class="price">R$ 25,00</p>
+      <div class="controls">
+        <button onclick="updateItem('Sushi Especial', -1, 25)">-</button>
+        <span id="Sushi Especial-count">0</span>
+        <button onclick="updateItem('Sushi Especial', 1, 25)">+</button>
+      </div>
+    </div>
   </div>
 
-  <button id="finalizar" onclick="handleFinalizar()">Finalizar Pedido</button>
+  <div class="cart">
+    <h2>🛒 Seu Pedido</h2>
+    <div class="cart-items" id="cart-items"></div>
+    <p class="total" id="cart-total">Total: R$ 0,00</p>
+  </div>
 
-  <!-- Popup Form -->
-  <div id="popupForm">
-    <div id="popupContent">
-      <h2>Finalizar Pedido</h2>
-      <div class="form-group">
-        <label>Nome:</label>
-        <input type="text" id="nomeCliente" required>
-      </div>
-      <div class="form-group">
-        <label>Forma de Pagamento:</label>
-        <select id="pagamento" required>
-          <option value="">Selecione</option>
-          <option value="Dinheiro">Dinheiro</option>
-          <option value="Pix">Pix</option>
-          <option value="Cartão">Cartão</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Bairro (Entrega):</label>
-        <select id="bairro" onchange="updateDeliveryFee()" required>
-          <option value="">Selecione</option>
-          <option value="Aerolândia">Aerolândia - R$10,00</option>
-          <option value="Altamira">Altamira - R$20,00</option>
-          <option value="Boma">Boma - R$10,00</option>
-        </select>
-      </div>
-      <button onclick="enviarPedido()">Confirmar</button>
-      <button id="closePopup" onclick="closePopup()">Cancelar</button>
+  <button class="finalizar-btn" onclick="abrirPopup()">Finalizar Pedido</button>
+
+  <!-- Pop-up -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h3>Finalize seu pedido</h3>
+      <label>Nome:</label>
+      <input type="text" id="nome" required>
+      <label>Forma de pagamento:</label>
+      <select id="pagamento">
+        <option value="Dinheiro">Dinheiro</option>
+        <option value="Pix">Pix</option>
+        <option value="Cartão">Cartão</option>
+      </select>
+      <label>Bairro:</label>
+      <select id="bairro">
+        <option value="Aerolândia">Aerolândia (R$10,00)</option>
+        <option value="Altamira">Altamira (R$20,00)</option>
+        <option value="Boma">Boma (R$10,00)</option>
+      </select>
+      <button onclick="finalizarPedido()">Enviar Pedido</button>
     </div>
   </div>
 
   <script>
     let cart = {};
-    let deliveryFee = 0;
-    let bairroSelecionado = "";
-    let firstClick = true;
+    let delivery = 0;
 
-    function addToCart(item, price, countId) {
-      if (!cart[item]) {
-        cart[item] = { qty: 0, price: price };
-      }
-      cart[item].qty++;
-      document.getElementById(countId).textContent = cart[item].qty;
-      updateCart();
+    function updateItem(item, qty, price) {
+      if (!cart[item]) cart[item] = { qty: 0, price: price };
+      cart[item].qty += qty;
+      if (cart[item].qty < 0) cart[item].qty = 0;
+      document.getElementById(item + '-count').textContent = cart[item].qty;
+      renderCart();
     }
 
-    function updateCart() {
-      const cartItems = document.getElementById("cartItems");
-      cartItems.innerHTML = "";
-      let subtotal = 0;
+    function renderCart() {
+      let cartItems = document.getElementById('cart-items');
+      cartItems.innerHTML = '';
+      let total = 0;
       for (let item in cart) {
-        const qtd = cart[item].qty;
-        const preco = cart[item].price;
-        const totalItem = qtd * preco;
-        subtotal += totalItem;
-
-        const li = document.createElement("li");
-        li.textContent = `${item} (${qtd}x) - R$ ${totalItem.toFixed(2)}`;
-        cartItems.appendChild(li);
+        if (cart[item].qty > 0) {
+          let subtotal = cart[item].qty * cart[item].price;
+          total += subtotal;
+          cartItems.innerHTML += `<p>${item} (${cart[item].qty} × R$${cart[item].price},00) = R$${subtotal},00</p>`;
+        }
       }
-
-      if (bairroSelecionado) {
-        document.getElementById("deliveryLine").textContent =
-          `Entrega (${bairroSelecionado}) - R$ ${deliveryFee.toFixed(2)}`;
-      } else {
-        document.getElementById("deliveryLine").textContent = "";
+      if (delivery > 0) {
+        total += delivery;
+        cartItems.innerHTML += `<p>Entrega = R$${delivery},00</p>`;
       }
-
-      document.getElementById("finalTotal").textContent =
-        (subtotal + deliveryFee).toFixed(2);
+      document.getElementById('cart-total').textContent = "Total: R$ " + total + ",00";
     }
 
-    function updateDeliveryFee() {
-      const bairro = document.getElementById("bairro").value;
-      bairroSelecionado = bairro;
-      if (bairro === "Aerolândia") deliveryFee = 10;
-      else if (bairro === "Altamira") deliveryFee = 20;
-      else if (bairro === "Boma") deliveryFee = 10;
-      else deliveryFee = 0;
-
-      updateCart();
+    function abrirPopup() {
+      document.getElementById('popup').style.display = 'flex';
     }
 
-    function handleFinalizar() {
-      if (firstClick) {
-        document.getElementById("popupForm").style.display = "flex";
-        firstClick = false;
-      } else {
-        enviarPedido();
-      }
-    }
+    function finalizarPedido() {
+      let nome = document.getElementById('nome').value;
+      let pagamento = document.getElementById('pagamento').value;
+      let bairro = document.getElementById('bairro').value;
 
-    function closePopup() {
-      document.getElementById("popupForm").style.display = "none";
-    }
-
-    function enviarPedido() {
-      const nome = document.getElementById("nomeCliente").value;
-      const pagamento = document.getElementById("pagamento").value;
-      const bairro = document.getElementById("bairro").value;
-
-      if (!nome || !pagamento || !bairro) {
-        alert("Preencha todos os campos!");
+      if (!nome) {
+        alert("Por favor, preencha seu nome.");
         return;
       }
 
-      let mensagem = `*Pedido Miray Sushi*%0A`;
-      mensagem += `Nome: ${nome}%0A`;
-      mensagem += `Pagamento: ${pagamento}%0A`;
-      mensagem += `Bairro: ${bairro}%0A`;
-      mensagem += `Itens:%0A`;
+      // Definir valor da entrega
+      if (bairro === "Aerolândia") delivery = 10;
+      else if (bairro === "Altamira") delivery = 20;
+      else if (bairro === "Boma") delivery = 10;
 
-      let subtotal = 0;
+      renderCart();
+
+      let resumo = `Pedido de ${nome}%0AForma de pagamento: ${pagamento}%0ABairro: ${bairro}%0A%0AItens:%0A`;
       for (let item in cart) {
-        const qtd = cart[item].qty;
-        const preco = cart[item].price;
-        const totalItem = qtd * preco;
-        subtotal += totalItem;
-        mensagem += `- ${item} (${qtd}x) = R$ ${totalItem.toFixed(2)}%0A`;
+        if (cart[item].qty > 0) {
+          resumo += `${cart[item].qty} × ${item} = R$${cart[item].qty * cart[item].price},00%0A`;
+        }
       }
+      resumo += `Entrega: R$${delivery},00%0A`;
+      resumo += document.getElementById('cart-total').textContent;
 
-      mensagem += `%0AEntrega: R$ ${deliveryFee.toFixed(2)}`;
-      mensagem += `%0A*Total Final: R$ ${(subtotal + deliveryFee).toFixed(2)}*`;
-
-      window.open(`https://wa.me/5511976039654?text=${mensagem}`, "_blank");
+      let url = `https://wa.me/5511976039654?text=${resumo}`;
+      window.open(url, "_blank");
     }
   </script>
 </body>
 </html>
-
