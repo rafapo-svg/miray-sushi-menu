@@ -175,11 +175,10 @@
   </div>
 
   <!-- TEMAKIS -->
-  <h2 class="section-title">Temakis</h2>
-  <section class="menu">
-    <div class="item">
+   <h2>Temakis</h2>
+   <div class="menu">
+    <div class="card">
       <img src="logo/Temakis/temaki salmao2.png" alt="temaki salmao" class="logo">
-      </header>
       <h3>Temaki Salmão</h3>
       <label>Tamanho:</label>
       <select class="size-select">
@@ -187,10 +186,10 @@
         <option value="40">M - R$ 40,00</option>
         <option value="50">G - R$ 50,00</option>
       </select>
-      <div class="quantity-control">
-        <button onclick="changeQty(this, -1)">-</button>
-        <span class="qty">0</span>
-        <button onclick="changeQty(this, 1)">+</button>
+    <div class="controls">
+        <button onclick="updateItem('Temaki', -1, 20)">-</button>
+        <span id="Temaki-count">0</span>
+        <button onclick="updateItem('Temaki', 1, 20)">+</button>
       </div>
     </div>
   
@@ -640,4 +639,5 @@
   </script>
 </body>
 </html>
+
 
